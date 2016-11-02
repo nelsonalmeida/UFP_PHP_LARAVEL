@@ -2,7 +2,7 @@
    include('config.php');
    session_start();
    
-   $user_check = $_SESSION['login_email'];
+   $user_check = $_SESSION['email'];
    
    $ses_sql = mysqli_query($db,"select email from persons where email = '$user_check' ");
    
@@ -10,7 +10,7 @@
    
    $login_session = $row['email'];
    
-   if(!isset($_SESSION['login_email'])){
+   if(!isset($_SESSION['email'])){
       header("location:login.php");
    }
 ?>

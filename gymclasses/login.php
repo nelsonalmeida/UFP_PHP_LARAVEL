@@ -1,30 +1,70 @@
 <?php
    include("config.php");
    session_start();
+
+
+
+    if(!function_exists('password_verify')){
+      function password_verify($password, $hash){
+        return (crypt($password, $hash) == $hash);
+      }
+    }
+
+  //funcao para redirecionar para a pagina correcta
+  function redirect($statute){
+    echo $statute;
+    if($statute==1){
+      header("location: admin.php");
+    }else{
+      header("location: client.php");
+    }
+  }
+
+
+
    
    if(isset($_POST["loginPerson"])){
 
       $userEmail=$_POST['loginEmail'];
       $userPassword=$_POST['loginPassword'];
 
-      $sql = "SELECT * FROM persons WHERE email = '$userEmail' and password = '$userPassword'";
+      $sql = "SELECT * FROM persons WHERE email = '$userEmail'";
       $result = mysqli_query($db,$sql);
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
       //$active = $row['active'];
       
       $count = mysqli_num_rows($result);
-		
+		  echo $count;
       if($count == 1) {
          //session_register("myusername");
 
-         $_SESSION['login_email'] = $userEmail;
-         $_SESSION['login_statute'] = $row['statute'];  //Variavel de sessao para dizer se é admin ou client
+         //$_SESSION['login_email'] = $userEmail;
+         //$_SESSION['login_statute'] = $row['statute'];  //Variavel de sessao para dizer se é admin ou client
+
+          $hash=$row['password'];
+          $statute=$row['statute'];
          
-         header("location: welcome.php");
+         //redirect($_SESSION['login_statute']);
+         //header("location: welcome.php");
       }else {
-         $error = "Your Login Name or Password is invalid";
+         $error = "O seu email ou password estao erradas!";
+         echo $error;
+      }
+
+      if(!isset($_SESSION["timeout"])){
+        if(password_verify($userPassword, $hash)==true){ 
+            $_SESSION['timeout'] = time() + 60; //inicia a secao e da-lhe 60 segundos de tempo
+            $_SESSION['email'] = $userEmail;
+            $_SESSION['statute'] = $statute;
+            redirect($statute);      //dependendo do estatuto redirecionar para a pagina do admin ou employed
+           
+           //echo "Utilizador Logado!";
+        }else{
+           echo "Password Errada<br/>"; 
+        }    
       }
    }
+
 ?>
 
 
@@ -179,7 +219,7 @@
 
 <?php
   if(isset($_POST["submitPerson"])){
-    insert_db_person();
+    insert_db_person($db);
   }
 
 
@@ -199,16 +239,75 @@
             return $pass;
         }
     }
-  function insert_db_person(){
-    //$token= token();
 
 
+    function confirm_pass_v2(){
+            $pass = $_POST["password"];
+            $reppass = $_POST["repPassword"];
+            $empty="";
+            
+            if($pass != $reppass){
+                echo "<br/>Passwords diferentes!!<br/>";
+                return $empty;
+            
+            }
+            else{
+                //echo "<br/>Password bem introduzidas!<br/>";
+            
+                $testNumber=0;
+                $testCharacter=0;
+                $testLetter=0;
+                for ($i=0; $i<strlen($pass); $i++){
+                    $character = "-+=_,!@$#*%<>[]{}";
+                    $numbers = "1234567890";
+                    $letters = "ABCDEFGHIJLMNOPQRSTUVWXYZ";
+                    for($i=0;$i<strlen($pass);$i++){
+                        for($x=0;$x<strlen($character);$x++){
+                            if($pass[$i]==$character[$x]){  //caracteres especiais
+                                $testCharacter++;
+                            }
+                        }
+                        for($x=0;$x<strlen($numbers);$x++){
+                            if($pass[$i]==$numbers[$x]){    //numeros
+                                $testNumber++;
+                            }
+                        }
+                        for($x=0;$x<strlen($letters);$x++){
+                            if($pass[$i]==$letters[$x]){    //letras maiusculas
+                                $testLetter++;
+                            }
+                        }
+                    }
+                }
+                if($testCharacter!=0 && $testNumber!=0 && $testLetter!=0){
+                    //echo "Password correta!";
+                     return crypt($pass);
+                }
+                else{
+                    echo "A password tem de conter um caracter especial, um numero e uma letras maiuscula!</br>";
+                    return $empty;
+                }
+            }
+        }
+
+
+    //FUNÇÃO PARA FAZER SHA256 A PASSWORD
+    define("MAX_LENGTH", 1000);
+    function generateHashWithSalt($password) {
+      $intermediateSalt = md5(uniqid(rand(), true));
+      $salt = substr($intermediateSalt, 0, MAX_LENGTH);
+      return hash("sha256", $password . $salt);
+    }
+
+
+  function insert_db_person($db){
+    //$token= md5($_POST["email"].$_POST["name"]);
     //Inserir na base de dados 
-    $sql="INSERT INTO persons (id,name, surname, year, city, postCode, country, mobilePhone, email, password) VALUES ('".$_POST["name"]."','".$_POST["surname"]."','".$_POST["year"]."','".$_POST["city"]."','".$_POST["postCode"]."','".$_POST["country"]."','".$_POST["mobilePhone"]."','".$_POST["email"]."','".confirm_pass()."');";
+    $sql="INSERT INTO persons (name, surname, year, city, postCode, country, mobilePhone, email, password) VALUES ('".$_POST["name"]."','".$_POST["surname"]."','".$_POST["year"]."','".$_POST["city"]."','".$_POST["postCode"]."','".$_POST["country"]."','".$_POST["mobilePhone"]."','".$_POST["email"]."','".confirm_pass_v2()."');";
     //echo $sql;
 
 
-    if(confirm_pass()!=""){
+    if(confirm_pass_v2()!=""){
       mysqli_query ($db, $sql);
     }
 

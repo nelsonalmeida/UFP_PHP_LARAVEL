@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User as User;
 use Illuminate\Http\Request;
 use App\Current_classes;
+use App\Classes_booking;
 
 
 class HomeController extends Controller
@@ -40,6 +41,7 @@ class HomeController extends Controller
       }
     }
 
+    //NÃO ESTA A SER USADA
     public function create_date(Request $request){
 
       $this->validate($request, array(
@@ -47,18 +49,16 @@ class HomeController extends Controller
       ));
 
       $current_classes = new Current_classes;
-
       $current_classes->id = 10  ;
       $current_classes->current_classes_date = $request->current_classes_monday_date;
       $current_classes->current_classes_hours = $request->current_classes_monday_hours;
       $current_classes->save();
 
       return view("admin");
-
     }
 
 
-    //FUNÇÕES PARA ATUALIZAR AS DATAS E AS HORAS A APRESENTAR NA HOME PAGE DOS CLIENTES
+    //FUNÇÕES PARA ATUALIZAR AS DATAS E AS HORAS DO LADO DO ADMIN E A APRESENTAR NA HOME PAGE DOS CLIENTES
     public function update_date_monday(Request $request){
 
       $id_date = Current_classes::find(0); //id da segunda feira
@@ -128,6 +128,7 @@ class HomeController extends Controller
 
       return view("admin");
     }
+    //FIM DAS FUNÇÕES PARA ATUALIZAR AS DATAS E AS HORAS DO LADO DO ADMIN E A APRESENTAR NA HOME PAGE DOS CLIENTES
 
 
 
@@ -135,23 +136,70 @@ class HomeController extends Controller
 
 
 
+    //public function search_user(Request $request){
+    //  $id = $request->id_person_change;
+    //  $persons = User::find($id);
+    //  return view('admin', array('persons' => $persons));
+    //}
 
-    public function search_user(Request $request){
-      $id = $request->id_person_change;
-      $persons = User::find($id);
-      return view('admin', array('persons' => $persons));
+    public function search_user($id_person_search){
+      $users = User::find($id_person_search);
+      echo $users;
+
+      //return view('admin', array('persons' => $persons));
+      return view('list_users', ['users' => $users]);
+    }
+
+    public function list_users(){
+        $users = User::get();
+
+        return view('list_users', ['users' => $users]);
     }
 
 
-    public function delete_user(Request $request){
+    //FUNÇÃO PARA EDITAR PESSOA NA BASE DE DADOS            FALTA VERIFICAR SE OS CAMPOS ESTAO PREENCHIDOS E SO INSERIR OS QUE ESTIVER
+    public function update_user(Request $request){
       $id = $request->id_person_change;
-      $persons = User::find($id)->delete();
+      $person = User::find($id);
+      $person->name = $request->name_person_change;
+      $person->email = $request->email_person_change;
+      $person->admin = $request->admin_person_change;
+      $person->save();
+      return view('admin');
+    }
+
+
+    //FUNÇÃO PARA ELIMINAR UM CLIENTE DA BASE DE DADOS
+    public function delete_user(Request $request){
+      $id = $request->id_delete_user;
+      $persons = User::find($id);
       $persons->delete();
       return view('admin');
-
-
-
-
     }
+
+
+
+      //INSERIR MARCAÇAO NA BASE DE DADOS
+
+      public function create_booking(Request $request){
+
+        echo $request->hora;
+
+        echo "<br><br>";
+        echo Auth::user()->id; //para inserir o id do atleta que esta logado
+        echo Auth::user()->name;
+
+
+
+        //$classes_booking = new Classes_booking;
+        //$classes_booking->$classes_booking_date = $request->data;
+        //$classes_booking->$classes_booking_hours = $request->hora;
+        //$classes_booking->$athlete = Auth::user()->id;
+        //$classes_booking->save();
+
+        //return view("admin");
+
+
+      }
 
 }

@@ -16,13 +16,22 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Controller;
 
-Route::get('/', function () {
+Auth::routes();
+
+Route::get('/', function() {
+    return redirect('/en');
+});
+
+Route::get('/en', function() {
     return view('welcome');
 });
 
-Auth::routes();
+Route::get('/pt', function() {
+    return view('welcome');
+});
 
-Route::get('/home', 'HomeController@index');
+Route::get('/{locale}/home', 'HomeController@index');
+
 //Route::post('/home','HomeController@search_user');
 
 //ROTAS PARA ATUALIZAR DATAS E HORAS A APRESENTAR AOS CLIENTES
@@ -35,14 +44,12 @@ Route::put('/home/update_saturday', 'HomeController@update_date_saturday');
 Route::put('/home/update_sunday', 'HomeController@update_date_sunday');
 
 //ROTA PARA PESQUISAR UM USER NA BASE DE DADOS
-Route::get('/home/person_search/{id_person_search}', 'HomeController@search_user');
-//Route::post('/home/person_search', 'HomeController@search_user');
-
+//Route::get('/home/person_search/{id_person_search}', 'HomeController@search_user_get');
+Route::post('/home/person_search', 'HomeController@search_user');
+//Route::get('/home/person_search/{id}', 'HomeController@search_user_get')->where('id');
 
 //ROTA PARA LISTAR TODOS OS USERS
 Route::get('/home/list_persons', 'HomeController@list_users');
-
-
 
 
 //ROTA PARA EDITAR UM USER NA BASE DE DADOS

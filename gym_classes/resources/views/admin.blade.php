@@ -97,7 +97,7 @@
 
               <br>
 
-              <form action="/home/person_search/" method="GET">
+              <form action="/home/person_search" method="POST">
               <td><center><input type="text" name="id_person_search" id="id_person_search" placeholder="id do atleta"></center></td>
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <br>
@@ -105,6 +105,18 @@
               </form>
 
                   <!--Deve inprimir o valor retornado -->
+
+              <!--EXEMPLO COM GET
+              <br><br>
+              <form action="/home/person_search/" method="POST">
+              <td><center><input type="text" name="id_person_search" id="id_person_search" placeholder="id do atleta"></center></td>
+              <input type="hidden" name="_method" value="GET">
+                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                  <br>
+              <td><center><button type="submit" class="btn btn-primary">Pesquisar</button></center></td>
+              </form>
+              -->
+
 
               <br><br>
               <form action="/home/list_persons" method="GET">
@@ -159,4 +171,5 @@
         </div>
     </div>
 </div>
+@include('layouts.footer')
 @endsection

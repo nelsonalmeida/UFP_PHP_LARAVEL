@@ -25,8 +25,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($locale)
     {
+      app()->setLocale($locale);
       if (Auth::check()) {
         if (Auth::user()->admin == 0) {
           $curent_classes = Current_classes::all();
@@ -136,18 +137,20 @@ class HomeController extends Controller
 
 
 
-    //public function search_user(Request $request){
-    //  $id = $request->id_person_change;
-    //  $persons = User::find($id);
-    //  return view('admin', array('persons' => $persons));
+    //public function search_user_get($id_person_search){
+
+      //$post = Post::(where'id', '=', $id)->first();
+
+      //$persons = User::find($post);
+      //echo $person;
+      //return view('admin', array('persons' => $persons));
     //}
 
-    public function search_user($id_person_search){
-      $users = User::find($id_person_search);
-      echo $users;
+    public function search_user(Request $request){
+      $users = User::find($request->id_person_search);
+      //echo $users;
 
-      //return view('admin', array('persons' => $persons));
-      return view('list_users', ['users' => $users]);
+      return view('show_user_search', ['users' => $users]);
     }
 
     public function list_users(){
@@ -182,7 +185,10 @@ class HomeController extends Controller
       //INSERIR MARCAÇAO NA BASE DE DADOS
 
       public function create_booking(Request $request){
-
+        echo $request->data;
+        echo "<br>";
+        echo $request->dia;
+        echo "<br>";
         echo $request->hora;
 
         echo "<br><br>";
@@ -197,7 +203,7 @@ class HomeController extends Controller
         //$classes_booking->$athlete = Auth::user()->id;
         //$classes_booking->save();
 
-        //return view("admin");
+        //return view("home");
 
 
       }

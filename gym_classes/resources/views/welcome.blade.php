@@ -75,7 +75,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Gym Classes
+                    {{ trans('pages.hello') }} Gym Classes
                 </div>
 
                 <div class="links">
@@ -84,4 +84,5 @@
             </div>
         </div>
     </body>
+    <b>@include('layouts.footer')</b>
 </html>

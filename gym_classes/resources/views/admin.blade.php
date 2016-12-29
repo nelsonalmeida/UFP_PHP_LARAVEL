@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading"><center>ADMINISTRADOR - PAINEL DE EDIÇÃO</center></div>
+                <div class="panel-heading"><center>{{ trans('adminTrans.title') }}</center></div>
 
                 <!--
                 Edição das datas de marcação de aulas
@@ -22,7 +22,7 @@
                     </tr>
 
                     <tr>
-                      <form action="/home/update_monday" method="POST">
+                      <form action="/home/en/update_monday" method="POST">
                       <td><center><input type="text"name="current_classes_monday_date" id="current_classes_monday_date" placeholder="Segunda-Feira"></center></td>
                       <td><center><input type="text" name="current_classes_monday_hours" id="current_classes_monday_hours"  placeholder="Horas para 2ª feira"></center></td>
                           <input name="_token" type="hidden" value="{{ csrf_token() }}">
@@ -31,7 +31,7 @@
                       </form>
                     </tr>
                     <tr>
-                      <form action="/home/update_tuesday" method="POST">
+                      <form action="/home/en/update_tuesday" method="POST">
                       <td><center><input type="text"name="current_classes_tuesday_date" id="current_classes_tuesday_date" placeholder="Terça-Feira"></center></td>
                       <td><center><input type="text" name="current_classes_tuesday_hours" id="current_classes_tuesday_hours"  placeholder="Horas para 3ª feira"></center></td>
                           <input name="_token" type="hidden" value="{{ csrf_token() }}">
@@ -40,7 +40,7 @@
                       </form>
                     </tr>
                     <tr>
-                      <form action="/home/update_wednesday" method="POST">
+                      <form action="/home/en/update_wednesday" method="POST">
                       <td><center><input type="text"name="current_classes_wednesday_date" id="current_classes_wednesday_date" placeholder="Quarta-Feira"></center></td>
                       <td><center><input type="text" name="current_classes_wednesday_hours" id="current_classes_wednesday_hours"  placeholder="Horas para 4ª feira"></center></td>
                           <input name="_token" type="hidden" value="{{ csrf_token() }}">
@@ -49,7 +49,7 @@
                       </form>
                     </tr>
                     <tr>
-                      <form action="/home/update_thursday" method="POST">
+                      <form action="/home/en/update_thursday" method="POST">
                       <td><center><input type="text"name="current_classes_thursday_date" id="current_classes_thursday_date" placeholder="Quinta-Feira"></center></td>
                       <td><center><input type="text" name="current_classes_thursday_hours" id="current_classes_thursday_hours"  placeholder="Horas para 5ª feira"></center></td>
                           <input name="_token" type="hidden" value="{{ csrf_token() }}">
@@ -58,7 +58,7 @@
                       </form>
                     </tr>
                     <tr>
-                      <form action="/home/update_friday" method="POST">
+                      <form action="/home/en/update_friday" method="POST">
                       <td><center><input type="text"name="current_classes_friday_date" id="current_classes_friday_date" placeholder="Sexta-Feira"></center></td>
                       <td><center><input type="text" name="current_classes_friday_hours" id="current_classes_friday_hours"  placeholder="Horas para 6ª feira"></center></td>
                           <input name="_token" type="hidden" value="{{ csrf_token() }}">
@@ -67,7 +67,7 @@
                       </form>
                     </tr>
                     <tr>
-                      <form action="/home/update_saturday" method="POST">
+                      <form action="/home/en/update_saturday" method="POST">
                       <td><center><input type="text"name="current_classes_saturday_date" id="current_classes_saturday_date" placeholder="Sabado"></center></td>
                       <td><center><input type="text" name="current_classes_saturday_hours" id="current_classes_saturday_hours"  placeholder="Horas para sabado"></center></td>
                           <input name="_token" type="hidden" value="{{ csrf_token() }}">
@@ -76,7 +76,7 @@
                       </form>
                     </tr>
                     <tr>
-                      <form action="/home/update_sunday" method="POST">
+                      <form action="/home/en/update_sunday" method="POST">
                       <td><center><input type="text"name="current_classes_sunday_date" id="current_classes_sunday_date" placeholder="Domingo"></center></td>
                       <td><center><input type="text" name="current_classes_sunday_hours" id="current_classes_sunday_hours"  placeholder="Horas para domingo"></center></td>
                           <input name="_token" type="hidden" value="{{ csrf_token() }}">
@@ -97,7 +97,7 @@
 
               <br>
 
-              <form action="/home/person_search" method="POST">
+              <form action="/home/en/person_search" method="POST">
               <td><center><input type="text" name="id_person_search" id="id_person_search" placeholder="id do atleta"></center></td>
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <br>
@@ -119,7 +119,7 @@
 
 
               <br><br>
-              <form action="/home/list_persons" method="GET">
+              <form action="/home/pt/list_persons" method="GET">
                   <td><center><button type="submit" class="btn btn-primary">Listar Todas</button></center></td>
               </form>
 
@@ -133,7 +133,7 @@
 
               <br>
 
-              <form action="/home/person_edite" method="POST">
+              <form action="/home/en/person_edite" method="POST">
                 <tr>
                   <td><center>ID da pessoa a editar:</center></td>
                   <td><center><input type="text" name="id_person_change" placeholder=""></center></td>
@@ -159,7 +159,7 @@
             <br><br>
             <h1><center>Pessoa a Apagar</center></h1>
 
-            <form action="/home/person/delete" method="POST">
+            <form action="/home/en/person_delete" method="POST">
               <center><input type="text" name="id_delete_user" placeholder="ID do Atleta"></center>
               <input name="_token" type="hidden" value="{{ csrf_token() }}">
               <input type="hidden" name="_method" value="DELETE">

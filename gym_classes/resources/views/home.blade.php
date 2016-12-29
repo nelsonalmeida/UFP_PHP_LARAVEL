@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading"><center>Marcação de aulas</center></div>
+                <div class="panel-heading"><center>{{ trans('homeTrans.title') }}</center></div>
                 <div class="panel-body">
                   <table style="width:100%">
                     <tr>
@@ -18,7 +18,7 @@
                     </tr>
 
                   @foreach ($curent_classes as $curent_classe)
-                  <form action="/home/create_booking" method="POST">
+                  <form action=/home/en/create_booking" method="POST">
                     <tr>
                       <td><center>  <input name="data" type="hidden" value="{{ $curent_classe->current_classes_date }}">{{ $curent_classe->current_classes_date }}</center></td>
                       <td><center>  <input name="dia" type="hidden" value="{{ $curent_classe->day_of_week }}">{{ $curent_classe->day_of_week }}</center></td>

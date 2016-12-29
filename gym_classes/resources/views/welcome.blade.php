@@ -68,14 +68,14 @@
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
-                    <a href="{{ url('/login') }}">Login</a>
-                    <a href="{{ url('/register') }}">Register</a>
+                    <a href="{{ url('/login') }}">{{ trans('welcomeTrans.login') }}</a>
+                    <a href="{{ url('/register') }}">{{ trans('welcomeTrans.register') }}</a>
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    {{ trans('pages.hello') }} Gym Classes
+                    {{ trans('welcomeTrans.hello') }} Gym Classes
                 </div>
 
                 <div class="links">

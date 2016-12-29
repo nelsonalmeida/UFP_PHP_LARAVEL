@@ -25,7 +25,25 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($locale)
+    public function index()
+    {
+      //app()->setLocale($locale);
+      if (Auth::check()) {
+        if (Auth::user()->admin == 0) {
+          $curent_classes = Current_classes::all();
+          return view('home', array('curent_classes' => $curent_classes ));
+        }
+        else if (Auth::user()->admin == 1) {
+          return view('admin');
+        }
+      }
+      else{
+        return ('/');
+      }
+    }
+
+    //FUNÇÃO PARA SE ESCOLHER LINGUAGEM NO URL
+    public function index_lang($locale)
     {
       app()->setLocale($locale);
       if (Auth::check()) {

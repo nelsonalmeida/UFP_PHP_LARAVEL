@@ -10,15 +10,15 @@
                 <div class="panel-body">
                   <table style="width:100%">
                     <tr>
-                      <th><center>Data</center></th>
-                      <th><center>Dia da semana</center></th>
-                      <th><center>Hora</center></th>
-                      <th><center>Marcar aula</center></th>
-                      <th><center>Estado</center></th> <!--AQUI VAI CONSULTAR A BASE DE DADOS E INDICAR EM QUE HORARIO SE INSCREVEU OU SE AINDA NAO ESTA INSCRITO EM NENHM-->
+                      <th><center>{{ trans('homeTrans.date') }}</center></th>
+                      <th><center>{{ trans('homeTrans.day_of_week') }}</center></th>
+                      <th><center>{{ trans('homeTrans.hours') }}</center></th>
+                      <th><center>{{ trans('homeTrans.mark_class') }}</center></th>
+                      <th><center>{{ trans('homeTrans.state') }}</center></th> <!--AQUI VAI CONSULTAR A BASE DE DADOS E INDICAR EM QUE HORARIO SE INSCREVEU OU SE AINDA NAO ESTA INSCRITO EM NENHM-->
                     </tr>
 
                   @foreach ($curent_classes as $curent_classe)
-                  <form action=/home/en/create_booking" method="POST">
+                  <form action="/home/en/create_booking" method="POST">
                     <tr>
                       <td><center>  <input name="data" type="hidden" value="{{ $curent_classe->current_classes_date }}">{{ $curent_classe->current_classes_date }}</center></td>
                       <td><center>  <input name="dia" type="hidden" value="{{ $curent_classe->day_of_week }}">{{ $curent_classe->day_of_week }}</center></td>
@@ -33,7 +33,7 @@
                         </select></center>
                       </td>
                       <input name="_token" type="hidden" value="{{ csrf_token() }}">
-                      <td><center><button type="submit" class="btn btn-primary">Marcar</button></center></td>
+                      <td><center><button type="submit" class="btn btn-primary">{{ trans('homeTrans.mark') }}</button></center></td>
                       <td><center>
                       </center></td>
                       @endif

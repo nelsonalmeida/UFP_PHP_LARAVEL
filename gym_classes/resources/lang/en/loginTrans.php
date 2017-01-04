@@ -2,6 +2,7 @@
 
 return [
 
-'hello' => 'Olá',
+'login' => 'login',
+
 
 ];

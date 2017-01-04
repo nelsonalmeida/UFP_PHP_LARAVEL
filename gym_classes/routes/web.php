@@ -23,6 +23,11 @@ Route::get('/', function() {
     return redirect('welcome/'.$locale);
 });
 
+//login com Facebook
+Route::get('auth/facebook', 'FacebookController@redirectToProvider')->name('facebook.login');
+Route::get('auth/facebook/callback', 'FacebookController@handleProviderCallback');
+
+
 Route::get('/welcome/{locale}', function ($locale) {
     App::setLocale($locale);
     return view('welcome');

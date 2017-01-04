@@ -15,6 +15,9 @@ class CreateCurrentClassesTable extends Migration
     {
         Schema::create('current_classes', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('current_classes_date');
+            $table->string('current_classes_hours');
+            $table->string('day_of_week');
             $table->timestamps();
         });
     }

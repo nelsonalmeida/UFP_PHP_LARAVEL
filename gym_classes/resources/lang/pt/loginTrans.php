@@ -2,6 +2,6 @@
 
 return [
 
-'hello' => 'Hello',
+'login' => 'Entrar',
 
 ];

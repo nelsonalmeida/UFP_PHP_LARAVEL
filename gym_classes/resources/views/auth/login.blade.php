@@ -54,6 +54,8 @@
                                     Login
                                 </button>
 
+                                <a href="{{ route('facebook.login')}}" class="btn btn-primary">Facebook Login</a>
+
                                 <a class="btn btn-link" href="{{ url('/password/reset') }}">
                                     Forgot Your Password?
                                 </a>

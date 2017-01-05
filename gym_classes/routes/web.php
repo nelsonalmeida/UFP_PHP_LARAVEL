@@ -63,9 +63,26 @@ Route::delete('/home/en/person_delete', 'HomeController@delete_user');
 //ROTA PARA CRIAR MARCAÇÃO NA BASE DE DADOS
 Route::post('/home/en/create_booking', 'HomeController@create_booking');
 
+//PESQUISAR POR ALUNOS EM AULAS
+Route::post('/home/en/athletes_in_class', 'HomeController@search_athletes_in_class');
+
+
 
 //NOTAS:
 //CREATE -> post
 //READ -> get
 //UPDATE -> put
 //DELETE -> delete
+
+
+//Exemplo cache
+Route::get('/cache', function(){
+  Cache::put('foo', App\User::all(),10);
+  return Cache::get('foo');
+});
+
+Route::get('home', function () {
+    // Obtém algum dado da sessão...
+    $valor = session('chave');
+    echo $valor;
+});

@@ -11,7 +11,7 @@ use Socialite;
 class FacebookController extends Controller
 {
     /**
-     * Redirect the user to the GitHub authentication page.
+     * Redirect the user to the Facebook authentication page.
      *
      * @return Response
      */
@@ -21,7 +21,7 @@ class FacebookController extends Controller
     }
 
     /**
-     * Obtain the user information from GitHub.
+     * Obtain the user information from Facebook.
      *
      * @return Response
      */
@@ -51,9 +51,9 @@ class FacebookController extends Controller
 
         auth()->login($user);
 
-        return redirect()->to('/home');
-        //$user->token;
+        return redirect()->to('/home/pt');
 
+        //$user->token;
         //echo $user->getName();
         //echo "<br/>";
         //echo $user->getEmail();

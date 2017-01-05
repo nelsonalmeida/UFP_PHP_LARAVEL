@@ -203,6 +203,7 @@ class HomeController extends Controller
       //INSERIR MARCAÇAO NA BASE DE DADOS
 
       public function create_booking(Request $request){
+
         echo $request->data;
         echo "<br>";
         echo $request->dia;
@@ -213,17 +214,33 @@ class HomeController extends Controller
         echo Auth::user()->id; //para inserir o id do atleta que esta logado
         echo Auth::user()->name;
 
+        /*
+        $classes_booking = new Classes_booking;
+        $classes_booking->classes_booking_date = $request->data;
+        $classes_booking->classes_booking_hours = $request->hora;
+        $classes_booking->athlete = Auth::user()->id;
+        $classes_booking->save();
 
-
-        //$classes_booking = new Classes_booking;
-        //$classes_booking->$classes_booking_date = $request->data;
-        //$classes_booking->$classes_booking_hours = $request->hora;
-        //$classes_booking->$athlete = Auth::user()->id;
-        //$classes_booking->save();
-
-        //return view("home");
-
+        return view("home");
+        */
 
       }
+
+      public function search_athletes_in_class(Request $request){
+        //echo $request->date;
+        echo "<br>";
+        //echo $request->hour;
+
+        Classes_booking::where('classes_booking_date', 'LIKE', $request->date)->get();
+
+        //$users = User::find($request->id_person_search);
+        //echo $users;
+
+        //return view('show_user_search', ['users' => $users]);
+      }
+
+
+
+
 
 }

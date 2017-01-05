@@ -37,5 +37,9 @@ return [
 'hours_for_saturday' => 'Hours for saturday',
 'hours_for_sunday' => 'Hours for sunday',
 
+'search_classes' => 'Search Athletes in Classes',
+'date_class' => 'Date',
+'hour_class' => 'Hour',
+
 
 ];

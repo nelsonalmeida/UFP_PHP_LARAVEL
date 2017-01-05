@@ -37,4 +37,8 @@ return [
 'hours_for_saturday' => 'Horas para sabado',
 'hours_for_sunday' => 'Horas para domingo',
 
+'search_classes' => 'Procurar alunos na aula',
+'date_class' => 'Data',
+'hour_class' => 'Hora',
+
 ];

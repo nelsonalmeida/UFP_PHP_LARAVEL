@@ -75,10 +75,11 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    {{ trans('welcomeTrans.hello') }} Gym Classes
+                    {{ trans('welcomeTrans.hello') }}
                 </div>
 
                 <div class="links">
+                  <img src="/images/GymClasses_Logo.png" style="..."/>
                     <!--AQUI E ONDE VAI FICAR A INFORMAÇAO VISIVEL A TODOS OS UTILIZADORES SEM NECESSIDADE DE REGISTO-->
                 </div>
             </div>

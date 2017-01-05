@@ -167,6 +167,26 @@
               <center><button type="submit" class="btn btn-primary">{{ trans('adminTrans.delete') }}</button></center>
               <br>
             </form>
+
+
+
+
+            <!--
+            Procurar alunos na aula
+            ________________________________________________________________
+            ________________________________________________________________
+          -->
+          <br><br>
+          <h1><center>{{ trans('adminTrans.search_classes') }}</center></h1>
+
+          <form action="/home/en/athletes_in_class" method="POST">
+            <center><input type="text" name="date" placeholder="{{ trans('adminTrans.date_class') }}"></center>
+            <center><input type="text" name="hour" placeholder="{{ trans('adminTrans.hour_class') }}"></center>
+            <input name="_token" type="hidden" value="{{ csrf_token() }}">
+            <br>
+            <center><button type="submit" class="btn btn-primary">{{ trans('adminTrans.search') }}</button></center>
+            <br>
+          </form>
             </div>
         </div>
     </div>

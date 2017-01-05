@@ -4,6 +4,6 @@ return [
 
 'login' => 'Entrar',
 'register' => 'Registar',
-'hello' => 'Olá',
+'hello' => 'Ola Cliente',
 
 ];

@@ -14,7 +14,6 @@
                       <th><center>{{ trans('homeTrans.day_of_week') }}</center></th>
                       <th><center>{{ trans('homeTrans.hours') }}</center></th>
                       <th><center>{{ trans('homeTrans.mark_class') }}</center></th>
-                      <th><center>{{ trans('homeTrans.state') }}</center></th> <!--AQUI VAI CONSULTAR A BASE DE DADOS E INDICAR EM QUE HORARIO SE INSCREVEU OU SE AINDA NAO ESTA INSCRITO EM NENHM-->
                     </tr>
 
                   @foreach ($curent_classes as $curent_classe)

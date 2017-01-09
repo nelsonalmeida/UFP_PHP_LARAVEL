@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Current_classes;
 use App\Classes_booking;
 
+use Illuminate\Support\Facades\Cache;
+
 
 class HomeController extends Controller
 {
@@ -60,7 +62,7 @@ class HomeController extends Controller
       }
     }
 
-    //NÃO ESTA A SER USADA
+    //A FUNCIONAR MAS NÃO ESTA A SER USADA porque só se atualiza a data do respetivo dia não se acrescenta dias
     public function create_date(Request $request){
 
       $this->validate($request, array(
@@ -150,20 +152,6 @@ class HomeController extends Controller
     //FIM DAS FUNÇÕES PARA ATUALIZAR AS DATAS E AS HORAS DO LADO DO ADMIN E A APRESENTAR NA HOME PAGE DOS CLIENTES
 
 
-
-
-
-
-
-    //public function search_user_get($id_person_search){
-
-      //$post = Post::(where'id', '=', $id)->first();
-
-      //$persons = User::find($post);
-      //echo $person;
-      //return view('admin', array('persons' => $persons));
-    //}
-
     public function search_user(Request $request){
       $users = User::find($request->id_person_search);
       //echo $users;
@@ -172,9 +160,17 @@ class HomeController extends Controller
     }
 
     public function list_users(){
-        $users = User::get();
+        //$users = User::get();
+
+        $users = Cache::get('users');
+
+        if($users == NULL){
+            Cache::put('users', User::get(),5); //5 é 5 minuto
+            $users = Cache::get('users');
+        }
 
         return view('list_users', ['users' => $users]);
+
     }
 
 
@@ -228,7 +224,7 @@ class HomeController extends Controller
 
       public function search_athletes_in_class(Request $request){
         //echo $request->date;
-        echo "<br>";
+        //echo "<br>";
         //echo $request->hour;
 
         Classes_booking::where('classes_booking_date', 'LIKE', $request->date)->get();

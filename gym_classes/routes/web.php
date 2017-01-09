@@ -47,9 +47,7 @@ Route::put('/home/en/update_saturday', 'HomeController@update_date_saturday');
 Route::put('/home/en/update_sunday', 'HomeController@update_date_sunday');
 
 //ROTA PARA PESQUISAR UM USER NA BASE DE DADOS
-//Route::get('/home/person_search/{id_person_search}', 'HomeController@search_user_get');
 Route::post('/home/en/person_search', 'HomeController@search_user');
-//Route::get('/home/person_search/{id}', 'HomeController@search_user_get')->where('id');
 
 //ROTA PARA LISTAR TODOS OS USERS
 Route::get('/home/pt/list_persons', 'HomeController@list_users');
@@ -79,10 +77,4 @@ Route::post('/home/en/athletes_in_class', 'HomeController@search_athletes_in_cla
 Route::get('/cache', function(){
   Cache::put('foo', App\User::all(),10);
   return Cache::get('foo');
-});
-
-Route::get('home', function () {
-    // Obtém algum dado da sessão...
-    $valor = session('chave');
-    echo $valor;
 });
